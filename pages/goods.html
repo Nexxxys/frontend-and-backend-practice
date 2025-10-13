@@ -8,8 +8,11 @@
 </head>
 <body>
     <div class="page-container">
-        <div class="header">Хэдер</div>
-        <div class="nav">
+        <header class="header">
+            <h1>Хэдер</h1>
+        </header>
+        
+        <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
                 <li class="nav-item"><a class="nav-link" href="news.html">Новости</a></li>
@@ -17,33 +20,38 @@
                 <li class="nav-item"><a class="nav-link" href="goods.html">Товары</a></li>
                 <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
             </ul>
-        </div>
+        </nav>
         
-        <div class="content">
-            <div class="product-card">
-                <img src="../images/image.png" alt="Товар 1" width="200">
-                <h2>Товар 1</h2>
-                <p>Цена товара 1: 1000 руб.</p>
-            </div>
-            
-            <hr>
-            
-            <div class="product-card">
-                <img src="../images/image copy.png" alt="Товар 2" width="200">
-                <h2>Товар 2</h2>
-                <p>Цена товара 2: 1500 руб.</p>
-            </div>
-            
-            <hr>
-            
-            <div class="product-card">
-                <img src="../images/image copy 2.png" alt="Товар 3" width="200">
-                <h2>Товар 3</h2>
-                <p>Цена товара 3: 2000 руб.</p>
-            </div>
-        </div>
+        <main class="content">
+            <section class="products-section">
+                <h1>Наши товары</h1>
+                <article class="product-card">
+                    <img src="../images/image.png" alt="Товар 1" width="200">
+                    <h2>Товар 1</h2>
+                    <p>Цена товара 1: 1000 руб.</p>
+                </article>
+                
+                <hr>
+                
+                <article class="product-card">
+                    <img src="../images/image copy.png" alt="Товар 2" width="200">
+                    <h2>Товар 2</h2>
+                    <p>Цена товара 2: 1500 руб.</p>
+                </article>
+                
+                <hr>
+                
+                <article class="product-card">
+                    <img src="../images/image copy 2.png" alt="Товар 3" width="200">
+                    <h2>Товар 3</h2>
+                    <p>Цена товара 3: 2000 руб.</p>
+                </article>
+            </section>
+        </main>
         
-        <div class="footer">Футер</div>
+        <footer class="footer">
+            <p>Футер</p>
+        </footer>
     </div>
 </body>
 </html>
