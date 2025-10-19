@@ -6,104 +6,121 @@
     <title>Контакты</title>
     <link rel="stylesheet" href="../style/styles.css">
     <style>
-        /* Стили для модального окна */
-        dialog::backdrop {
-            background: rgba(0, 0, 0, 0.6);
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
             animation: fadeIn 0.3s ease;
         }
 
-        dialog {
-            border: none;
-            border-radius: 12px;
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
             padding: 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.3s ease;
+            border-radius: 12px;
+            width: 90%;
             max-width: 500px;
-            width: 90vw;
-            max-height: 90vh;
-            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+            position: relative;
         }
 
         .modal-header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
-            padding: 1.5rem;
+            padding: 20px;
             border-radius: 12px 12px 0 0;
-            margin: 0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
         .modal-header h2 {
             margin: 0;
-            color: white;
             font-size: 1.5rem;
         }
 
-        .modal-content {
-            padding: 2rem;
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close:hover {
+            opacity: 0.8;
+        }
+
+        .modal-body {
+            padding: 30px;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
             font-weight: 600;
             color: #2c3e50;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-control {
             width: 100%;
-            padding: 0.75rem;
+            padding: 12px;
             border: 2px solid #e9ecef;
             border-radius: 6px;
-            font-size: 1rem;
+            font-size: 16px;
             transition: border-color 0.3s ease;
             box-sizing: border-box;
-            font-family: inherit;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-control:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .form-group textarea {
+        textarea.form-control {
             min-height: 120px;
             resize: vertical;
-            line-height: 1.5;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-weight: 600;
             font-family: inherit;
         }
 
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
         }
 
@@ -113,13 +130,12 @@
         }
 
         .btn-secondary {
-            background: #f8f9fa;
-            color: #2c3e50;
-            border: 2px solid #e9ecef;
+            background: #6c757d;
+            color: white;
         }
 
         .btn-secondary:hover {
-            background: #e9ecef;
+            background: #5a6268;
         }
 
         .required {
@@ -128,37 +144,17 @@
 
         .error-message {
             color: #e74c3c;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
+            font-size: 14px;
+            margin-top: 5px;
             display: none;
         }
 
-        .form-group.error input,
-        .form-group.error select,
-        .form-group.error textarea {
+        .has-error .form-control {
             border-color: #e74c3c;
         }
 
-        .form-group.error .error-message {
+        .has-error .error-message {
             display: block;
-        }
-
-        .contact-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            margin-top: 2rem;
-        }
-
-        .contact-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
 
         @keyframes fadeIn {
@@ -167,78 +163,109 @@
         }
 
         @keyframes slideIn {
-            from { 
+            from {
                 opacity: 0;
                 transform: translateY(-50px) scale(0.9);
             }
-            to { 
+            to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
         }
 
-        /* Адаптивность */
-        @media (max-width: 600px) {
-            dialog {
-                margin: 1rem;
-                width: calc(100vw - 2rem);
-            }
-            
-            .modal-actions {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-
-            .modal-content {
-                padding: 1.5rem;
-            }
-
-            .modal-header {
-                padding: 1rem 1.5rem;
-            }
-        }
-
-        /* Стили для страницы контактов */
+        
         .contacts-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 40px 20px;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 40px;
             color: #2c3e50;
+            font-size: 2.5rem;
         }
 
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
         }
 
-        .contact-item {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-        }
-
-        .contact-item h3 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-info {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
+        .contact-card {
             background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .contact-card p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .contact-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: block;
+            margin: 40px auto 0;
+            min-width: 200px;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -260,35 +287,37 @@
 
         <main class="content">
             <section class="contacts-container">
-                <h2 class="section-title">Наши контакты</h2>
+                <h2 class="section-title">Свяжитесь с нами</h2>
                 
-                <article class="contact-info">
-                    <h3>Электронная почта</h3>
-                    <p>Адрес электронной почты: olegk6441@mail.ru</p>
-                </article>
-                
-                <article class="contact-info">
-                    <h3>Физический адрес</h3>
-                    <p>Адрес: г. Москва, ул. Пушкина, д. Колотушкина</p>
-                </article>
-
                 <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>Телефон</h3>
-                        <p>+7 (987)-783-77-63</p>
+                    <div class="contact-card">
+                        <h3>📧 Электронная почта</h3>
+                        <p>olegk6441@mail.ru</p>
                     </div>
-                    <div class="contact-item">
-                        <h3>Время работы</h3>
-                        <p>Пн-Пт: 9:00-18:00</p>
+                    
+                    <div class="contact-card">
+                        <h3>📞 Телефон</h3>
+                        <p>+7 (987) 783-77-63</p>
                     </div>
-                    <div class="contact-item">
-                        <h3>Социальные сети</h3>
+                    
+                    <div class="contact-card">
+                        <h3>📍 Адрес</h3>
+                        <p>г. Москва, ул. Пушкина, д. Колотушкина</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h3>🕒 Время работы</h3>
+                        <p>Понедельник - Пятница<br>9:00 - 18:00</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h3>🌐 Социальные сети</h3>
                         <p>VK, Telegram, WhatsApp</p>
                     </div>
                 </div>
                 
-                <button class="contact-button" onclick="contactModal.showModal()">
-                    Связаться с нами
+                <button class="contact-button" onclick="openModal()">
+                    Написать сообщение
                 </button>
             </section>
         </main>
@@ -297,173 +326,110 @@
             <p>© 2024 Все права защищены. Контактная информация</p>
         </footer>
 
-        <dialog id="contactModal">
-            <div class="modal-header">
-                <h2>Форма обратной связи</h2>
-            </div>
-            
+        
+        <div id="contactModal" class="modal">
             <div class="modal-content">
-                <form id="feedbackForm" method="dialog" novalidate>
-                    <div class="form-group">
-                        <label for="name">Имя <span class="required">*</span></label>
-                        <input type="text" id="name" name="name" required 
-                               placeholder="Введите ваше имя"
-                               minlength="2"
-                               maxlength="50">
-                        <div class="error-message" id="nameError">Пожалуйста, введите корректное имя (от 2 до 50 символов)</div>
-                    </div>
+                <div class="modal-header">
+                    <h2>Форма обратной связи</h2>
+                    <button class="close" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="feedbackForm">
+                        <div class="form-group">
+                            <label for="name">Имя <span class="required">*</span></label>
+                            <input type="text" id="name" class="form-control" required 
+                                   placeholder="Введите ваше имя">
+                            <div class="error-message">Пожалуйста, введите ваше имя</div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="phone">Телефон <span class="required">*</span></label>
-                        <input type="tel" id="phone" name="phone" required 
-                               placeholder="+7 (XXX) XXX-XX-XX"
-                               pattern="\+7\s?[\(]{0,1}[0-9]{3}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}">
-                        <div class="error-message" id="phoneError">Пожалуйста, введите номер в формате +7 (XXX) XXX-XX-XX</div>
-                    </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон <span class="required">*</span></label>
+                            <input type="tel" id="phone" class="form-control" required 
+                                   placeholder="+7 (XXX) XXX-XX-XX">
+                            <div class="error-message">Пожалуйста, введите корректный номер телефона</div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="email">Электронная почта <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" required 
-                               placeholder="example@mail.ru">
-                        <div class="error-message" id="emailError">Пожалуйста, введите корректный email адрес</div>
-                    </div>
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" class="form-control" required 
+                                   placeholder="example@mail.ru">
+                            <div class="error-message">Пожалуйста, введите корректный email</div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="category">Категория обращения <span class="required">*</span></label>
-                        <select id="category" name="category" required>
-                            <option value="">Выберите категорию</option>
-                            <option value="technical">Техническая поддержка</option>
-                            <option value="commercial">Коммерческое предложение</option>
-                            <option value="cooperation">Сотрудничество</option>
-                            <option value="complaint">Жалоба</option>
-                            <option value="suggestion">Предложение</option>
-                            <option value="other">Другое</option>
-                        </select>
-                        <div class="error-message" id="categoryError">Пожалуйста, выберите категорию обращения</div>
-                    </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение <span class="required">*</span></label>
+                            <textarea id="message" class="form-control" required 
+                                      placeholder="Опишите ваш вопрос или предложение..."></textarea>
+                            <div class="error-message">Пожалуйста, введите ваше сообщение</div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="message">Текст обращения <span class="required">*</span></label>
-                        <textarea id="message" name="message" required 
-                                  placeholder="Опишите вашу проблему или вопрос..."
-                                  minlength="10"
-                                  maxlength="1000"></textarea>
-                        <div class="error-message" id="messageError">Сообщение должно содержать от 10 до 1000 символов</div>
-                    </div>
-
-                    <div class="modal-actions">
-                        <button type="button" class="btn btn-secondary" onclick="contactModal.close()">Отмена</button>
-                        <button type="button" class="btn btn-primary" onclick="submitForm()">Отправить</button>
-                    </div>
-                </form>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeModal()">Отмена</button>
+                            <button type="button" class="btn btn-primary" onclick="submitForm()">Отправить</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </dialog>
+        </div>
 
         <script>
-            const contactModal = document.getElementById('contactModal');
-            const feedbackForm = document.getElementById('feedbackForm');
-
-            function showError(inputId, message) {
-                const formGroup = document.querySelector(`#${inputId}`).closest('.form-group');
-                formGroup.classList.add('error');
-                formGroup.querySelector('.error-message').textContent = message;
+            
+            function openModal() {
+                document.getElementById('contactModal').style.display = 'block';
             }
 
-            function hideError(inputId) {
-                const formGroup = document.querySelector(`#${inputId}`).closest('.form-group');
-                formGroup.classList.remove('error');
+            function closeModal() {
+                document.getElementById('contactModal').style.display = 'none';
+                resetForm();
             }
 
+            function resetForm() {
+                document.getElementById('feedbackForm').reset();
+                
+                const formGroups = document.querySelectorAll('.form-group');
+                formGroups.forEach(group => {
+                    group.classList.remove('has-error');
+                });
+            }
+
+            
             function validateForm() {
                 let isValid = true;
-
-                const name = document.getElementById('name');
-                if (name.value.length < 2 || name.value.length > 50) {
-                    showError('name', 'Имя должно содержать от 2 до 50 символов');
-                    isValid = false;
-                } else {
-                    hideError('name');
-                }
-
-                const phone = document.getElementById('phone');
-                const phoneRegex = /\+7\s?[\(]{0,1}[0-9]{3}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}/;
-                if (!phoneRegex.test(phone.value)) {
-                    showError('phone', 'Введите номер в формате +7 (XXX) XXX-XX-XX');
-                    isValid = false;
-                } else {
-                    hideError('phone');
-                }
-
-                const email = document.getElementById('email');
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email.value)) {
-                    showError('email', 'Введите корректный email адрес');
-                    isValid = false;
-                } else {
-                    hideError('email');
-                }
-
-                const category = document.getElementById('category');
-                if (!category.value) {
-                    showError('category', 'Пожалуйста, выберите категорию обращения');
-                    isValid = false;
-                } else {
-                    hideError('category');
-                }
-
-                const message = document.getElementById('message');
-                if (message.value.length < 10 || message.value.length > 1000) {
-                    showError('message', 'Сообщение должно содержать от 10 до 1000 символов');
-                    isValid = false;
-                } else {
-                    hideError('message');
-                }
+                const formGroups = document.querySelectorAll('.form-group');
+                
+                formGroups.forEach(group => {
+                    const input = group.querySelector('input, textarea');
+                    if (input.hasAttribute('required') && !input.value.trim()) {
+                        group.classList.add('has-error');
+                        isValid = false;
+                    } else {
+                        group.classList.remove('has-error');
+                    }
+                });
 
                 return isValid;
             }
 
             function submitForm() {
-                if (!validateForm()) {
-                    return;
+                if (validateForm()) {
+                    
+                    alert('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.');
+                    closeModal();
                 }
-
-                const formData = new FormData(feedbackForm);
-                const data = {
-                    name: formData.get('name'),
-                    phone: formData.get('phone'),
-                    email: formData.get('email'),
-                    category: formData.get('category'),
-                    message: formData.get('message')
-                };
-
-                console.log('Данные формы:', data);
-                
-                alert('Спасибо! Ваше обращение отправлено. Мы свяжемся с вами в ближайшее время.');
-                
-                contactModal.close();
-                
-                feedbackForm.reset();
-                
-                document.querySelectorAll('.form-group').forEach(group => {
-                    group.classList.remove('error');
-                });
             }
 
-            contactModal.addEventListener('click', function(event) {
-                if (event.target === this) {
-                    this.close();
+            
+            window.onclick = function(event) {
+                const modal = document.getElementById('contactModal');
+                if (event.target === modal) {
+                    closeModal();
                 }
-            });
+            }
 
-            feedbackForm.querySelectorAll('input, select, textarea').forEach(input => {
-                input.addEventListener('input', function() {
-                    hideError(this.id);
-                });
-            });
-
-            contactModal.addEventListener('keydown', function(event) {
+            
+            document.addEventListener('keydown', function(event) {
                 if (event.key === 'Escape') {
-                    this.close();
+                    closeModal();
                 }
             });
         </script>
