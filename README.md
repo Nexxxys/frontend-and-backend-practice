@@ -1,1 +1,1 @@
-- [Публичная страница на GitHub Pages]([https://nexxxys.github.io/my-awesome-project1/src/index.html](https://nexxxys.github.io/frontend-and-backend-practice))
+- [Публичная страница на GitHub Pages]([(https://nexxxys.github.io/frontend-and-backend-practice)])
